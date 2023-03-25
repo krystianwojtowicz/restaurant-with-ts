@@ -18,6 +18,41 @@ export const App = () => {
     JSON.parse(localStorage.getItem("cartItems")!) || []
   );
   const [order, setOrder] = useState({});
+
+  const addPizza = (product: CartItemType) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    let pizzaWithoutIngredients = { ...product };
+    delete pizzaWithoutIngredients.ingredients;
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === pizzaWithoutIngredients.id
+            ? { ...exist, qty: (exist.qty || 0) + 1 }
+            : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...pizzaWithoutIngredients, qty: 1 }]);
+    }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    console.log(cartItems);
+  };
+
+  const removePizza = (product: CartItemType) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+      if (exist.qty === 1) {
+        setCartItems(cartItems.filter((x) => x.id !== product.id));
+      } else {
+        setCartItems(
+          cartItems.map((x) =>
+            x.id === product.id ? { ...exist, qty: (exist.qty || 0) + 1 } : x
+          )
+        );
+      }
+    }
+  };
+  
   return (
     <OrderContext.Provider value={{ cartItems, setCartItems, order, setOrder }}>
     <div className="App">
@@ -29,8 +64,8 @@ export const App = () => {
           <Link to="/">Home</Link>
         </nav>
         <Routes>
-        <Route path="/" element={<List />}></Route>
-        <Route path="/basket" element={<Basket />}></Route>
+        <Route path="/" element={<List addPizza={addPizza}/>}></Route>
+        <Route path="/basket" element={<Basket removePizza={removePizza} addPizza={addPizza} />}></Route>
         <Route path="/confirmation" element={<Confirmation />}></Route>
       </Routes>
       </BrowserRouter>
