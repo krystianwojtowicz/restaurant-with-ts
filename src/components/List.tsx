@@ -1,6 +1,6 @@
 import { CartItemType } from "../Interface";
 // import { OrderContext } from "./OrderContext";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect} from "react";
 import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { Product } from './Product'

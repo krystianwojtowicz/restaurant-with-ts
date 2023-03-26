@@ -10,7 +10,7 @@ export interface OrderType {
   cartItems?: CartItemType[];
   city?: string;
   customerName?: string;
-  date?: Date;
+  date?: string;
   email?: string;
   numberOfFlat?: string;
   numberOfStreet?: string;
