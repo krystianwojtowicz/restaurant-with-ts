@@ -43,21 +43,18 @@ function generateOptions(): Option[] {
       hour: "2-digit",
       minute: "2-digit",
     });
-    const value = label.replace(":", "");
+    // const value = label.replace(":", "");
+    const value = label
     options.push({ label, value });
   }
 
   return options;
 }
 
-// const defaulValue = (options: object[], value: string) => {
-//   return options ? options.find((option: object)=>option['value'] === value) : '';
-// }
-
 export const Basket = ({ addPizza, removePizza }: BasketProps) => {
-  const [selectedOption, setSelectedOption] = useState<string>("");
 
   const [options, setOptions] = useState<Option[]>([]);
+  console.log(options)
   useEffect(() => {
     const newOptions = generateOptions();
     setOptions(newOptions);

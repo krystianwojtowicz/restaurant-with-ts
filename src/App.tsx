@@ -1,12 +1,6 @@
 import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { OrderContext } from "./components/OrderContext";
-// import {
-//   Link,
-//   HashRouter as BrowserRouter,
-//   Routes,
-//   Route,
-// } from "react-router-dom";
 import { Basket } from "./components/Basket";
 import { List } from "./components/List";
 import { Confirmation } from "./components/Confirmation";
@@ -21,18 +15,19 @@ export const App = () => {
 
   const addPizza = (product: CartItemType) => {
     const exist = cartItems.find((x) => x.id === product.id);
-    let pizzaWithoutIngredients = { ...product };
-    delete pizzaWithoutIngredients.ingredients;
+    let pizzaWithoutSomeData = { ...product };
+    delete pizzaWithoutSomeData.ingredients;
+    delete pizzaWithoutSomeData.img;
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === pizzaWithoutIngredients.id
+          x.id === pizzaWithoutSomeData.id
             ? { ...exist, qty: (exist.qty || 0) + 1 }
             : x
         )
       );
     } else {
-      setCartItems([...cartItems, { ...pizzaWithoutIngredients, qty: 1 }]);
+      setCartItems([...cartItems, { ...pizzaWithoutSomeData, qty: 1 }]);
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
     console.log(cartItems);

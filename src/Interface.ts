@@ -4,6 +4,7 @@ export interface CartItemType {
   price?: number;
   ingredients?: string[];
   qty?: number;
+  img?: string;
 }
 
 export interface OrderType {
