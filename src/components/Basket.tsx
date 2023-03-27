@@ -13,17 +13,6 @@ interface BasketProps {
   removePizza: (pizza: CartItemType) => void;
 }
 
-// const options = [
-//   {
-//     label: "11:30",
-//     value: "11:30",
-//   },
-//   {
-//     label: "11:45",
-//     value: "11:45",
-//   },
-// ];
-
 interface Option {
   label: string;
   value: string;
@@ -45,12 +34,19 @@ function generateOptions(): Option[] {
   return options;
 }
 
+// const defaulValue = (options: object[], value: string) => {
+//   return options ? options.find((option: object)=>option['value'] === value) : '';
+// }
+
 export const Basket = ({ addPizza, removePizza }: BasketProps) => {
+  const [selectedOption, setSelectedOption] = useState<string>("");
+
   const [options, setOptions] = useState<Option[]>([]);
   useEffect(() => {
     const newOptions = generateOptions();
     setOptions(newOptions);
   }, []);
+  
   const formik = useFormik({
     initialValues: {
       customerName: "",
@@ -68,8 +64,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
       street: Yup.string().required("Required"),
       numberOfStreet: Yup.string().required("Required"),
       numberOfFlat: Yup.number()
-        .typeError("Must be a number")
-        .required("Required"),
+        .typeError("Must be a number"),
       email: Yup.string().email().required("Required"),
       phone: Yup.string()
         .matches(
@@ -193,16 +188,10 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           touched={formik.touched.numberOfFlat}
           error={formik.errors.numberOfFlat}
         ></Input>
-        <Input
-          type="string"
-          onChange={formik.handleChange}
-          name="date"
-          value={formik.values.date}
-          onBlur={formik.handleBlur}
-          touched={formik.touched.date}
-          error={formik.errors.date}
-        ></Input>
-        <Select className="date" id="date" options={options} />
+        <Select className="date" name="date" value={options.find(option => option.value === formik.values.date)}
+    onChange={option => formik.setFieldValue('date', option?.value)}
+    onBlur={formik.handleBlur}
+    options={options} />
         <Input
           type="text"
           placeholder="e-mail"
