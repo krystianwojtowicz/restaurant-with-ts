@@ -20,14 +20,30 @@ interface Option {
 
 function generateOptions(): Option[] {
   const now = new Date();
-  const roundedTime = new Date(Math.ceil(now.getTime() / (15 * 60 * 1000)) * (15 * 60 * 1000));
+  const roundedTime = new Date(
+    Math.ceil(now.getTime() / (15 * 60 * 1000)) * (15 * 60 * 1000)
+  );
   const startTime = new Date(roundedTime.getTime() + 45 * 60 * 1000);
-  const endTime = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), 23, 59, 59);
+  const endTime = new Date(
+    startTime.getFullYear(),
+    startTime.getMonth(),
+    startTime.getDate(),
+    23,
+    59,
+    59
+  );
   const options: Option[] = [];
 
-  for (let time = startTime; time <= endTime; time = new Date(time.getTime() + 15 * 60 * 1000)) {
-    const label = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const value = label.replace(':', '');
+  for (
+    let time = startTime;
+    time <= endTime;
+    time = new Date(time.getTime() + 15 * 60 * 1000)
+  ) {
+    const label = time.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const value = label.replace(":", "");
     options.push({ label, value });
   }
 
@@ -46,7 +62,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
     const newOptions = generateOptions();
     setOptions(newOptions);
   }, []);
-  
+
   const formik = useFormik({
     initialValues: {
       customerName: "",
@@ -63,8 +79,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
       city: Yup.string().required("Required"),
       street: Yup.string().required("Required"),
       numberOfStreet: Yup.string().required("Required"),
-      numberOfFlat: Yup.number()
-        .typeError("Must be a number"),
+      numberOfFlat: Yup.number().typeError("Must be a number"),
       email: Yup.string().email().required("Required"),
       phone: Yup.string()
         .matches(
@@ -188,10 +203,14 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           touched={formik.touched.numberOfFlat}
           error={formik.errors.numberOfFlat}
         ></Input>
-        <Select className="date" name="date" value={options.find(option => option.value === formik.values.date)}
-    onChange={option => formik.setFieldValue('date', option?.value)}
-    onBlur={formik.handleBlur}
-    options={options} />
+        <Select
+          className="date"
+          name="date"
+          value={options.find((option) => option.value === formik.values.date)}
+          onChange={(option) => formik.setFieldValue("date", option?.value)}
+          onBlur={formik.handleBlur}
+          options={options}
+        />
         <Input
           type="text"
           placeholder="e-mail"
