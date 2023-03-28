@@ -1,1 +1,10 @@
-nav{display:flex;justify-content:space-around}.date{width:150px}#react-select-3-listbox div{text-align:center}
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+.date {
+  width: 150px;
+}
+#react-select-3-listbox div {
+  text-align: center;
+}

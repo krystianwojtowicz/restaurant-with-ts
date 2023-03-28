@@ -5,8 +5,7 @@ interface ProductProps {
   addPizza: (pizza: CartItemType) => void;
 }
 
-export const Product = ({pizza, addPizza}: ProductProps) => {
-
+export const Product = ({ pizza, addPizza }: ProductProps) => {
   return (
     <div>
       <h1>name: {pizza.name}</h1>
@@ -16,4 +15,4 @@ export const Product = ({pizza, addPizza}: ProductProps) => {
       <button onClick={() => addPizza(pizza)}>add to cart</button>
     </div>
   );
-}
+};

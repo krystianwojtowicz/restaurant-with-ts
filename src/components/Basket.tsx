@@ -44,7 +44,7 @@ function generateOptions(): Option[] {
       minute: "2-digit",
     });
     // const value = label.replace(":", "");
-    const value = label
+    const value = label;
     options.push({ label, value });
   }
 
@@ -52,7 +52,6 @@ function generateOptions(): Option[] {
 }
 
 export const Basket = ({ addPizza, removePizza }: BasketProps) => {
-
   const [options, setOptions] = useState<Option[]>([]);
   useEffect(() => {
     const newOptions = generateOptions();

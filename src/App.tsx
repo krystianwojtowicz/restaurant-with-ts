@@ -5,7 +5,7 @@ import { Basket } from "./components/Basket";
 import { List } from "./components/List";
 import { Confirmation } from "./components/Confirmation";
 import "./App.scss";
-import { CartItemType } from './Interface'
+import { CartItemType } from "./Interface";
 
 export const App = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(
@@ -47,26 +47,29 @@ export const App = () => {
       }
     }
   };
-  
+
   return (
     <OrderContext.Provider value={{ cartItems, setCartItems, order, setOrder }}>
-    <div className="App">
-      <BrowserRouter>
-        <nav>
-          <span>PIZZA HUNT</span>
-          <Link to="/basket">Basket</Link>
-          <Link to="/confirmation">Confirmation</Link>
-          <Link to="/">Home</Link>
-        </nav>
-        <Routes>
-        <Route path="/" element={<List addPizza={addPizza}/>}></Route>
-        <Route path="/basket" element={<Basket removePizza={removePizza} addPizza={addPizza} />}></Route>
-        <Route path="/confirmation" element={<Confirmation />}></Route>
-      </Routes>
-      </BrowserRouter>
-    </div>
+      <div className="App">
+        <BrowserRouter>
+          <nav>
+            <span>PIZZA HUNT</span>
+            <Link to="/basket">Basket</Link>
+            <Link to="/confirmation">Confirmation</Link>
+            <Link to="/">Home</Link>
+          </nav>
+          <Routes>
+            <Route path="/" element={<List addPizza={addPizza} />}></Route>
+            <Route
+              path="/basket"
+              element={<Basket removePizza={removePizza} addPizza={addPizza} />}
+            ></Route>
+            <Route path="/confirmation" element={<Confirmation />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </OrderContext.Provider>
   );
-}
+};
 
 export default App;

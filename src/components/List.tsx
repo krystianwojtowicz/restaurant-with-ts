@@ -1,8 +1,8 @@
 import { CartItemType } from "../Interface";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
 import { db } from "../firebase-config";
-import { Product } from './Product'
+import { Product } from "./Product";
 
 interface ListProps {
   addPizza: (pizza: CartItemType) => void;

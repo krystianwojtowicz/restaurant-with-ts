@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { OrderContext } from "./OrderContext";
 
 export const Confirmation = () => {
-  const { order} = useContext(OrderContext);
+  const { order } = useContext(OrderContext);
   return (
     <main>
       <h1>Confirmation</h1>
@@ -24,4 +24,4 @@ export const Confirmation = () => {
       )}
     </main>
   );
-}
+};
