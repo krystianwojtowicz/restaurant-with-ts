@@ -6,7 +6,7 @@ export const Confirmation = () => {
   return (
     <main>
       <h1>Confirmation</h1>
-      {order ? (
+      {order?.customerName ? (
         <div>
           <h2>customer's name: {order.customerName}</h2>
           <h2>street: {order.street}</h2>
