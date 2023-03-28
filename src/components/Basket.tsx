@@ -54,7 +54,6 @@ function generateOptions(): Option[] {
 export const Basket = ({ addPizza, removePizza }: BasketProps) => {
 
   const [options, setOptions] = useState<Option[]>([]);
-  console.log(options)
   useEffect(() => {
     const newOptions = generateOptions();
     setOptions(newOptions);

@@ -22,6 +22,6 @@ export interface OrderType {
 export interface OrderContextType {
   cartItems: CartItemType[] | [];
   setCartItems: (items: CartItemType[]) => void;
-  order: OrderType | [];
+  order?: OrderType;
   setOrder: (order: OrderType) => void;
 }
