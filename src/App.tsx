@@ -30,7 +30,6 @@ export const App = () => {
       setCartItems([...cartItems, { ...pizzaWithoutSomeData, qty: 1 }]);
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    console.log(cartItems);
   };
 
   const removePizza = (product: CartItemType) => {
@@ -48,16 +47,54 @@ export const App = () => {
     }
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  console.log(isOpen)
+
   return (
     <OrderContext.Provider value={{ cartItems, setCartItems, order, setOrder }}>
       <div className="App">
         <BrowserRouter>
-          <nav>
+        <div className="navbar">
+            <span className="nav-logo">PIZZA HUNT</span>
+            <div className={`nav-items ${isOpen && "open"}`}>
+              <Link className="link" to="/basket" onClick={()=> setIsOpen(false)}>
+                Basket
+              </Link>
+              <Link className="link" to="/confirmation" onClick={()=> setIsOpen(false)}>
+                Confirmation
+              </Link>
+              <Link className="link" to="/" onClick={()=> setIsOpen(false)}>
+                Home
+              </Link>
+            </div>
+            {/* <div className={`nav-toggle ${isOpen && "open"}`} onClick={()=> setIsOpen(!isOpen)}> */}
+            <div className={`nav-toggle ${isOpen && "open"}`} onClick={()=> setIsOpen(!isOpen)}>
+              <div className="bar"></div>
+            </div>
+          </div>
+          {/* <div className="navbar">
+            <span className="nav-logo">PIZZA HUNT</span>
+            <div className={`nav-items ${isOpen} && "open"`}>
+              <Link className="link" to="/basket">
+                Basket
+              </Link>
+              <Link className="link" to="/confirmation">
+                Confirmation
+              </Link>
+              <Link className="link" to="/">
+                Home
+              </Link>
+            </div>
+            <div className={`nav-toggle ${isOpen && "open"}`} onClick={()=> setIsOpen(!isOpen)}>
+              <div className="bar"></div>
+            </div>
+          </div> */}
+          {/* <nav>
             <span>PIZZA HUNT</span>
             <Link to="/basket">Basket</Link>
             <Link to="/confirmation">Confirmation</Link>
             <Link to="/">Home</Link>
-          </nav>
+          </nav> */}
           <Routes>
             <Route path="/" element={<List addPizza={addPizza} />}></Route>
             <Route
