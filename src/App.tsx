@@ -1,4 +1,5 @@
-import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { OrderContext } from "./components/OrderContext";
 import { Basket } from "./components/Basket";
@@ -6,6 +7,7 @@ import { List } from "./components/List";
 import { Confirmation } from "./components/Confirmation";
 import "./App.scss";
 import { CartItemType } from "./Interface";
+import { Navbar } from './components/Navbar/Navbar'
 
 export const App = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(
@@ -47,54 +49,11 @@ export const App = () => {
     }
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen)
-
   return (
     <OrderContext.Provider value={{ cartItems, setCartItems, order, setOrder }}>
       <div className="App">
         <BrowserRouter>
-        <div className="navbar">
-            <span className="nav-logo">PIZZA HUNT</span>
-            <div className={`nav-items ${isOpen && "open"}`}>
-              <Link className="link" to="/basket" onClick={()=> setIsOpen(false)}>
-                Basket
-              </Link>
-              <Link className="link" to="/confirmation" onClick={()=> setIsOpen(false)}>
-                Confirmation
-              </Link>
-              <Link className="link" to="/" onClick={()=> setIsOpen(false)}>
-                Home
-              </Link>
-            </div>
-            {/* <div className={`nav-toggle ${isOpen && "open"}`} onClick={()=> setIsOpen(!isOpen)}> */}
-            <div className={`nav-toggle ${isOpen && "open"}`} onClick={()=> setIsOpen(!isOpen)}>
-              <div className="bar"></div>
-            </div>
-          </div>
-          {/* <div className="navbar">
-            <span className="nav-logo">PIZZA HUNT</span>
-            <div className={`nav-items ${isOpen} && "open"`}>
-              <Link className="link" to="/basket">
-                Basket
-              </Link>
-              <Link className="link" to="/confirmation">
-                Confirmation
-              </Link>
-              <Link className="link" to="/">
-                Home
-              </Link>
-            </div>
-            <div className={`nav-toggle ${isOpen && "open"}`} onClick={()=> setIsOpen(!isOpen)}>
-              <div className="bar"></div>
-            </div>
-          </div> */}
-          {/* <nav>
-            <span>PIZZA HUNT</span>
-            <Link to="/basket">Basket</Link>
-            <Link to="/confirmation">Confirmation</Link>
-            <Link to="/">Home</Link>
-          </nav> */}
+          <Navbar/>
           <Routes>
             <Route path="/" element={<List addPizza={addPizza} />}></Route>
             <Route
