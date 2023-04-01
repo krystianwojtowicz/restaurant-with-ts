@@ -6,14 +6,14 @@ import { Basket } from "./components/Basket/Basket";
 import { List } from "./components/List/List";
 import { Confirmation } from "./components/Confirmation";
 import "./App.scss";
-import { CartItemType } from "./Interface";
+import { CartItemType, OrderType } from "./Interface";
 import { Navbar } from "./components/Navbar/Navbar";
 
 export const App = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(
     JSON.parse(localStorage.getItem("cartItems")!) || []
   );
-  const [order, setOrder] = useState({});
+  const [order, setOrder] = useState<OrderType>({});
 
   const addPizza = (product: CartItemType) => {
     const exist = cartItems.find((x) => x.id === product.id);
