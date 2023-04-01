@@ -1,8 +1,9 @@
-import { CartItemType } from "../Interface";
+import { CartItemType } from "../../Interface";
 import { useState, useEffect } from "react";
 import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
-import { db } from "../firebase-config";
-import { Product } from "./Product";
+import { db } from "../../firebase-config";
+import { Product } from "../Product/Product";
+import "./List.scss";
 
 interface ListProps {
   addPizza: (pizza: CartItemType) => void;
@@ -28,7 +29,7 @@ export const List = (props: ListProps) => {
   }, []);
 
   return (
-    <main>
+    <main className="list">
       {pizzas.map((pizza) => {
         return (
           <Product

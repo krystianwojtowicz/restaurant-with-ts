@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect } from "react";
-import { OrderContext } from "./OrderContext";
-import { CartItemType } from "../Interface";
+import { OrderContext } from "../OrderContext";
+import { CartItemType } from "../../Interface";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
-import { Input } from "./Input";
+import { db } from "../../firebase-config";
+import { Input } from "../Input";
+import './Basket.scss';
 
 interface BasketProps {
   addPizza: (pizza: CartItemType) => void;
@@ -99,7 +100,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
   const addOrder = async () => {
     await addDoc(ordersCollectionRef, order);
   };
-
+  
   useEffect(() => {
     if (isSubmit) {
       addOrder();
@@ -116,7 +117,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
   };
 
   return (
-    <main>
+    <main className="basket">
       <div>
         <h1>your cart</h1>
         {cartItems?.length === 0 && <h1>Cart is Empty</h1>}

@@ -1,0 +1,32 @@
+.product {
+  margin: 20px 20px 0 0;
+  background: #ffffff;
+}
+
+.product .img {
+  width: 100%;
+  height: auto;
+}
+
+.product .paragraph {
+  height: 85px;
+  margin: 0 15px 15px;
+}
+
+.product .heading {
+  margin: 15px;
+}
+
+.product .flex {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product .flex .button {
+  background: #82b300;
+  border: none;
+  color: #ffffff;
+  padding: 0 10px;
+  border-radius: 0.5rem;
+}

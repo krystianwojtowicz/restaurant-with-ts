@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { OrderContext } from "./components/OrderContext";
-import { Basket } from "./components/Basket";
-import { List } from "./components/List";
+import { Basket } from "./components/Basket/Basket";
+import { List } from "./components/List/List";
 import { Confirmation } from "./components/Confirmation";
 import "./App.scss";
 import { CartItemType } from "./Interface";
-import { Navbar } from './components/Navbar/Navbar'
+import { Navbar } from "./components/Navbar/Navbar";
 
 export const App = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(
@@ -53,7 +53,7 @@ export const App = () => {
     <OrderContext.Provider value={{ cartItems, setCartItems, order, setOrder }}>
       <div className="App">
         <BrowserRouter>
-          <Navbar/>
+          <Navbar />
           <Routes>
             <Route path="/" element={<List addPizza={addPizza} />}></Route>
             <Route
