@@ -12,10 +12,10 @@ export const Product = ({ pizza, addPizza }: ProductProps) => {
       <img className="img" src={pizza.img} alt="pizza" />
       <h2 className="heading">{pizza.name}</h2>
       <p className="paragraph">
-        ingredients: {pizza.ingredients && pizza.ingredients.join(",")}
+        {pizza.ingredients && pizza.ingredients.join(", ")}
       </p>
       <div className="flex">
-        <h2>{pizza.price} zł</h2>
+        <h2>{pizza.price} $</h2>
         <button className="button" onClick={() => addPizza(pizza)}>add to cart</button>
       </div>
     </div>
