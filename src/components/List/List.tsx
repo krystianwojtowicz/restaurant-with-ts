@@ -17,7 +17,7 @@ export const List = (props: ListProps) => {
   useEffect(() => {
     const fetchPizzas = async () => {
       const data: QuerySnapshot = await getDocs(pizzasCollectionRef);
-      const pizzasData: CartItemType[] = data.docs.map((doc) => ({
+      const pizzasData: any = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));

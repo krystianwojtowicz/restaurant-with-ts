@@ -115,16 +115,9 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
     }
   };
 
-  let totalPrice = 0;
-
-  if (cartItems) {
-    for (let i = 0; i < cartItems.length; i++) {
-      const item = cartItems[i];
-      if (item.price !== undefined && item.qty !== undefined) {
-        totalPrice += item.price * item.qty;
-      }
-    }
-  }
+  let totalPrice: number = cartItems.reduce((total, item) => {
+    return total + Number(item.price) * item.qty;
+  }, 0);
 
   return (
     <main className="basket">
@@ -147,7 +140,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
                 onClick={() => addPizza(item)}
               ></i>
               <p>
-                {item.qty} x {item.price?.toFixed(2)} $
+                {item.qty} x {item.price} $
               </p>
               <i
                 onClick={() => removePizza(item)}

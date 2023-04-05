@@ -9,11 +9,32 @@ import "./App.scss";
 import { CartItemType, OrderType } from "./Interface";
 import { Navbar } from "./components/Navbar/Navbar";
 
+const initialValues: CartItemType = {
+  id: "",
+  name: "",
+  price: 0,
+  ingredients: [""],
+  qty: 0,
+  img: "",
+};
+
+const initialValuesOrder: OrderType = {
+  cartItems: [],
+  city: "",
+  customerName: "",
+  date: "",
+  email: "",
+  numberOfFlat: "",
+  numberOfStreet: "",
+  phone: "",
+  street: "",
+};
+
 export const App = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(
     JSON.parse(localStorage.getItem("cartItems")!) || []
   );
-  const [order, setOrder] = useState<OrderType>({});
+  const [order, setOrder] = useState<OrderType>(initialValuesOrder);
 
   const addPizza = (product: CartItemType) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -28,6 +49,7 @@ export const App = () => {
             : x
         )
       );
+      console.log(cartItems)
     } else {
       setCartItems([...cartItems, { ...pizzaWithoutSomeData, qty: 1 }]);
     }
