@@ -4,7 +4,7 @@ import { useState } from "react";
 import { OrderContext } from "./components/OrderContext";
 import { Basket } from "./components/Basket/Basket";
 import { List } from "./components/List/List";
-import { Confirmation } from "./components/Confirmation";
+import { Confirmation } from "./components/Confirmation/Confirmation";
 import "./App.scss";
 import { CartItemType, OrderType } from "./Interface";
 import { Navbar } from "./components/Navbar/Navbar";

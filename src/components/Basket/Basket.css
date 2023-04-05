@@ -33,11 +33,12 @@
 }
 
 .basket .form .label-date {
+  display: block;
+  margin-top: 15px !important;
   font-weight: bold;
   margin: auto;
   width: 173px;
   padding: 5px;
-  display: block;
   text-align: start;
 }
 
@@ -52,13 +53,13 @@
 
 .basket .form .button {
   font-weight: 500;
-  margin: 10px 0;
+  margin: 20px 0;
   cursor: pointer;
-  height: 20px;
+  height: 30px;
   background: #82b300;
   border: none;
   color: #ffffff;
-  padding: 0 10px;
+  width: 173px;
   border-radius: 0.5rem;
   font-weight: bold;
 }

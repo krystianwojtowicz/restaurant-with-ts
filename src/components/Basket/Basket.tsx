@@ -44,7 +44,6 @@ function generateOptions(): Option[] {
       hour: "2-digit",
       minute: "2-digit",
     });
-    // const value = label.replace(":", "");
     const value = label;
     options.push({ label, value });
   }
@@ -54,6 +53,13 @@ function generateOptions(): Option[] {
 
 export const Basket = ({ addPizza, removePizza }: BasketProps) => {
   const [options, setOptions] = useState<Option[]>([]);
+  const { cartItems, setCartItems } = useContext(OrderContext);
+  const { order, setOrder } = useContext(OrderContext);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const ordersCollectionRef = collection(db, "orders");
+  const addOrder = async () => {
+    await addDoc(ordersCollectionRef, order);
+  };
   useEffect(() => {
     const newOptions = generateOptions();
     setOptions(newOptions);
@@ -86,25 +92,14 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
     }),
     onSubmit: (values) => {
       setOrder({ ...cartItems, ...values });
-      // await addDoc(props.pizzasCollectionRef, order);
       setIsSubmit(true);
-      // console.warn(values);
     },
   });
-
-  const { cartItems, setCartItems } = useContext(OrderContext);
-  const { order, setOrder } = useContext(OrderContext);
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const ordersCollectionRef = collection(db, "orders");
-  const addOrder = async () => {
-    await addDoc(ordersCollectionRef, order);
-  };
 
   useEffect(() => {
     if (isSubmit) {
       addOrder();
       setIsSubmit(false);
-      // remove last line
     }
   }, [isSubmit]);
 
