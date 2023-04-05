@@ -1,0 +1,54 @@
+.basket {
+  width: 250px;
+  margin: auto;
+  text-align: center;
+  .heading {
+    margin: 20px 0;
+  }
+  .item,
+  .basket-paragraph {
+    margin: 10px 0;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    padding: 5px;
+    font-weight: bold;
+    .price {
+      margin: 10px 0;
+    }
+    .fa-trash {
+      display: block;
+    }
+  }
+  .form {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    .label-date {
+      display: block;
+      margin-top: 15px !important;
+      font-weight: bold;
+      margin: auto;
+      width: 173px;
+      padding: 5px;
+      text-align: start;
+    }
+    .date {
+      width: 173px;
+      margin: auto;
+      #react-select-3-listbox div {
+        text-align: center;
+      }
+    }
+    .button {
+      font-weight: 500;
+      margin: 20px 0;
+      cursor: pointer;
+      height: 30px;
+      background: #82b300;
+      border: none;
+      color: #ffffff;
+      width: 173px;
+      border-radius: 0.5rem;
+      font-weight: bold;
+    }
+  }
+}

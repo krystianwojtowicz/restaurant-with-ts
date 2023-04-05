@@ -1,0 +1,29 @@
+.product {
+    margin: 20px 20px 0;
+    background: #ffffff;
+    .img {
+        width: 100%;
+        height: auto;
+    }
+    .paragraph {
+        margin: 0 15px 15px;
+        height: 65px;
+    }
+    .heading {
+        margin: 15px;
+        height: 64px;
+    }
+    .flex {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        .button {
+            cursor: pointer;
+            background: #82b300;
+            border: none;
+            color: #ffffff;
+            padding: 0 10px;
+            border-radius: 0.5rem;
+        }
+    }
+}

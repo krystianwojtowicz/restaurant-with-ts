@@ -1,12 +1,10 @@
-nav {
-  display: flex;
-  justify-content: space-around;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-.date {
-  width: 150px;
-}
-
-#react-select-3-listbox div {
-  text-align: center;
+.App {
+  background: #f4f4f4;
+  font-family: "Mukta";
+  min-height: 100vh;
 }

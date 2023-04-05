@@ -1,0 +1,115 @@
+.navbar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5265c4;
+  .nav-logo {
+    font-weight: 700;
+    color: #ffffff;
+    margin: 15px;
+    font-size: 21px;
+  }
+  .link {
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 15px;
+    position: relative;
+    opacity: 0.9;
+  }
+  .link:hover {
+    opacity: 1;
+  }
+  .link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: all 0.45s;
+  }
+  .link:hover::before {
+    width: 100%;
+  }
+  .nav-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 475px) {
+  .navbar {
+    .nav-toggle.open {
+      .bar {
+        transform: translateX(-40px);
+        background: transparent;
+      }
+      .bar::before {
+        width: 32px;
+        transform: rotate(45deg) translate(26px, -26px);
+      }
+      .bar::after {
+        transform: rotate(-45deg) translate(26px, 26px);
+      }
+    }
+    .nav-toggle {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      .bar {
+        position: relative;
+        width: 32px;
+        height: 2px;
+        background: #ffffff;
+        transition: all 0.45s ease-in-out;
+      }
+      .bar::before,
+      .bar::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        background: #ffffff;
+        border-radius: 2px;
+        transition: all 0.45s ease-in-out;
+      }
+      .bar::before {
+        width: 32px;
+        transform: translateY(-8px);
+        right: 0;
+      }
+      .bar::after {
+        width: 32px;
+        transform: translateY(8px);
+      }
+    }
+    .nav-items.open {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .nav-items {
+      opacity: 0;
+      z-index: 1;
+      position: absolute;
+      top: 60px;
+      display: flex;
+      flex-direction: column;
+      background: #3b4da7;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateX(-100%);
+      transition: transform 0.45s;
+      .link {
+        text-align: center;
+      }
+      .link::before {
+        background: transparent;
+      }
+    }
+  }
+}

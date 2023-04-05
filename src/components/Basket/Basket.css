@@ -1,0 +1,65 @@
+.basket {
+  width: 250px;
+  margin: auto;
+  text-align: center;
+}
+
+.basket .heading {
+  margin: 20px 0;
+}
+
+.basket .item,
+.basket .basket-paragraph {
+  margin: 10px 0;
+  background: #ffffff;
+  border-radius: 0.5rem;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.basket .item .price,
+.basket .basket-paragraph .price {
+  margin: 10px 0;
+}
+
+.basket .item .fa-trash,
+.basket .basket-paragraph .fa-trash {
+  display: block;
+}
+
+.basket .form {
+  background: #ffffff;
+  border-radius: 0.5rem;
+}
+
+.basket .form .label-date {
+  display: block;
+  margin-top: 15px !important;
+  font-weight: bold;
+  margin: auto;
+  width: 173px;
+  padding: 5px;
+  text-align: start;
+}
+
+.basket .form .date {
+  width: 173px;
+  margin: auto;
+}
+
+.basket .form .date #react-select-3-listbox div {
+  text-align: center;
+}
+
+.basket .form .button {
+  font-weight: 500;
+  margin: 20px 0;
+  cursor: pointer;
+  height: 30px;
+  background: #82b300;
+  border: none;
+  color: #ffffff;
+  width: 173px;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}

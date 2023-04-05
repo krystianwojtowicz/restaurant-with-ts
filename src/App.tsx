@@ -1,17 +1,40 @@
-import { Link, BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { OrderContext } from "./components/OrderContext";
-import { Basket } from "./components/Basket";
-import { List } from "./components/List";
-import { Confirmation } from "./components/Confirmation";
+import { Basket } from "./components/Basket/Basket";
+import { List } from "./components/List/List";
+import { Confirmation } from "./components/Confirmation/Confirmation";
 import "./App.scss";
-import { CartItemType } from "./Interface";
+import { CartItemType, OrderType } from "./Interface";
+import { Navbar } from "./components/Navbar/Navbar";
+
+const initialValues: CartItemType = {
+  id: "",
+  name: "",
+  price: 0,
+  ingredients: [""],
+  qty: 0,
+  img: "",
+};
+
+const initialValuesOrder: OrderType = {
+  cartItems: [],
+  city: "",
+  customerName: "",
+  date: "",
+  email: "",
+  numberOfFlat: "",
+  numberOfStreet: "",
+  phone: "",
+  street: "",
+};
 
 export const App = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>(
     JSON.parse(localStorage.getItem("cartItems")!) || []
   );
-  const [order, setOrder] = useState({});
+  const [order, setOrder] = useState<OrderType>(initialValuesOrder);
 
   const addPizza = (product: CartItemType) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -26,11 +49,11 @@ export const App = () => {
             : x
         )
       );
+      console.log(cartItems)
     } else {
       setCartItems([...cartItems, { ...pizzaWithoutSomeData, qty: 1 }]);
     }
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    console.log(cartItems);
   };
 
   const removePizza = (product: CartItemType) => {
@@ -52,12 +75,7 @@ export const App = () => {
     <OrderContext.Provider value={{ cartItems, setCartItems, order, setOrder }}>
       <div className="App">
         <BrowserRouter>
-          <nav>
-            <span>PIZZA HUNT</span>
-            <Link to="/basket">Basket</Link>
-            <Link to="/confirmation">Confirmation</Link>
-            <Link to="/">Home</Link>
-          </nav>
+          <Navbar />
           <Routes>
             <Route path="/" element={<List addPizza={addPizza} />}></Route>
             <Route

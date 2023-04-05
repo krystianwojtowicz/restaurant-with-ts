@@ -1,26 +1,26 @@
 export interface CartItemType {
-  id?: string;
-  name?: string;
-  price?: number;
+  id: string;
+  name: string;
+  price: number;
   ingredients?: string[];
-  qty?: number;
+  qty: number;
   img?: string;
 }
 
 export interface OrderType {
   cartItems?: CartItemType[];
-  city?: string;
-  customerName?: string;
-  date?: string;
-  email?: string;
-  numberOfFlat?: string;
-  numberOfStreet?: string;
-  phone?: string;
-  street?: string;
+  city: string;
+  customerName: string;
+  date: string;
+  email: string;
+  numberOfFlat: string;
+  numberOfStreet: string;
+  phone: string;
+  street: string;
 }
 
 export interface OrderContextType {
-  cartItems: CartItemType[] | [];
+  cartItems: CartItemType[];
   setCartItems: (items: CartItemType[]) => void;
   order?: OrderType;
   setOrder: (order: OrderType) => void;

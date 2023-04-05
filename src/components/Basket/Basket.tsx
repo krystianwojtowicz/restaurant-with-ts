@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect } from "react";
-import { OrderContext } from "./OrderContext";
-import { CartItemType } from "../Interface";
+import { OrderContext } from "../OrderContext";
+import { CartItemType, OrderType } from "../../Interface";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
-import { Input } from "./Input";
+import { db } from "../../firebase-config";
+import { Input } from "../Input/Input";
+import "./Basket.scss";
 
 interface BasketProps {
   addPizza: (pizza: CartItemType) => void;
@@ -43,7 +44,6 @@ function generateOptions(): Option[] {
       hour: "2-digit",
       minute: "2-digit",
     });
-    // const value = label.replace(":", "");
     const value = label;
     options.push({ label, value });
   }
@@ -53,6 +53,13 @@ function generateOptions(): Option[] {
 
 export const Basket = ({ addPizza, removePizza }: BasketProps) => {
   const [options, setOptions] = useState<Option[]>([]);
+  const { cartItems, setCartItems } = useContext(OrderContext);
+  const { order, setOrder } = useContext(OrderContext);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const ordersCollectionRef = collection(db, "orders");
+  const addOrder = async () => {
+    await addDoc(ordersCollectionRef, order);
+  };
   useEffect(() => {
     const newOptions = generateOptions();
     setOptions(newOptions);
@@ -70,41 +77,29 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
       phone: "",
     },
     validationSchema: Yup.object({
-      customerName: Yup.string().required("Required"),
-      city: Yup.string().required("Required"),
-      street: Yup.string().required("Required"),
-      numberOfStreet: Yup.string().required("Required"),
-      numberOfFlat: Yup.number().typeError("Must be a number"),
-      email: Yup.string().email().required("Required"),
+      customerName: Yup.string().required("required"),
+      city: Yup.string().required("required"),
+      street: Yup.string().required("required"),
+      numberOfStreet: Yup.string().required("required"),
+      numberOfFlat: Yup.number().typeError("must be a number"),
+      email: Yup.string().email().required("required"),
       phone: Yup.string()
         .matches(
           /^((\+48)|(0048)|(48))?[\s\-]?\d{3}[\s\-]?\d{3}[\s\-]?\d{3}$/,
-          "Invalid phone number"
+          "invalid phone number"
         )
-        .required("Required"),
+        .required("required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values: OrderType) => {
       setOrder({ ...cartItems, ...values });
-      // await addDoc(props.pizzasCollectionRef, order);
       setIsSubmit(true);
-      // console.warn(values);
     },
   });
-
-  const { cartItems, setCartItems } = useContext(OrderContext);
-  const { order, setOrder } = useContext(OrderContext);
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const ordersCollectionRef = collection(db, "orders");
-
-  const addOrder = async () => {
-    await addDoc(ordersCollectionRef, order);
-  };
 
   useEffect(() => {
     if (isSubmit) {
       addOrder();
       setIsSubmit(false);
-      // remove last line
     }
   }, [isSubmit]);
 
@@ -115,16 +110,20 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
     }
   };
 
+  let totalPrice: number = cartItems.reduce((total: number, item: CartItemType) => {
+    return total + item.price * item.qty;
+  }, 0);
+
   return (
-    <main>
+    <main className="basket">
       <div>
-        <h1>your cart</h1>
-        {cartItems?.length === 0 && <h1>Cart is Empty</h1>}
+        <h1 className="heading">your cart</h1>
+        {cartItems?.length === 0 && <h1 className="heading">Cart is Empty</h1>}
         {cartItems?.map((item) => (
-          <div key={item.id}>
+          <div className="item" key={item.id}>
             <div>
               <h4>{item.name}</h4>
-              <h5>${item.price}</h5>
+              <h5 className="price">${item.price}</h5>
             </div>
             <div>
               <i
@@ -136,7 +135,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
                 onClick={() => addPizza(item)}
               ></i>
               <p>
-                {item.qty} x ${item.price?.toFixed(2)}
+                {item.qty} x {item.price} $
               </p>
               <i
                 onClick={() => removePizza(item)}
@@ -145,9 +144,11 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
             </div>
           </div>
         ))}
+        <p className="basket-paragraph">Your Total: {totalPrice} $</p>
       </div>
-      <form onSubmit={formik.handleSubmit}>
+      <form className="form" onSubmit={formik.handleSubmit}>
         <Input
+          label="name"
           type="text"
           placeholder="name"
           onChange={formik.handleChange}
@@ -157,8 +158,8 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           touched={formik.touched.customerName}
           error={formik.errors.customerName}
         />
-        {/* <label htmlFor="city">city</label> */}
         <Input
+          label="city"
           type="text"
           placeholder="city"
           onChange={formik.handleChange}
@@ -169,6 +170,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.city}
         ></Input>
         <Input
+          label="street"
           type="text"
           placeholder="street"
           onChange={formik.handleChange}
@@ -179,6 +181,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.street}
         ></Input>
         <Input
+          label="number of street"
           type="text"
           placeholder="number of street"
           onChange={formik.handleChange}
@@ -189,6 +192,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.numberOfStreet}
         ></Input>
         <Input
+          label="namber of flat"
           type="text"
           placeholder="number of flat"
           onChange={formik.handleChange}
@@ -198,6 +202,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           touched={formik.touched.numberOfFlat}
           error={formik.errors.numberOfFlat}
         ></Input>
+        <label className="label-date" htmlFor="date">hour of delivery</label>
         <Select
           className="date"
           name="date"
@@ -207,6 +212,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           options={options}
         />
         <Input
+          label="e-mail"
           type="text"
           placeholder="e-mail"
           onChange={formik.handleChange}
@@ -217,6 +223,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.email}
         ></Input>
         <Input
+          label="phone number"
           type="text"
           placeholder="phone"
           onChange={formik.handleChange}
@@ -227,7 +234,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.phone}
         ></Input>
 
-        <button type="submit">submit</button>
+        <button className="button" type="submit">submit</button>
       </form>
     </main>
   );
