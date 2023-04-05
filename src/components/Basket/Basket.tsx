@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { OrderContext } from "../OrderContext";
-import { CartItemType } from "../../Interface";
+import { CartItemType, OrderType } from "../../Interface";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
@@ -81,16 +81,16 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
       city: Yup.string().required("required"),
       street: Yup.string().required("required"),
       numberOfStreet: Yup.string().required("required"),
-      numberOfFlat: Yup.number().typeError("Must be a number"),
+      numberOfFlat: Yup.number().typeError("must be a number"),
       email: Yup.string().email().required("required"),
       phone: Yup.string()
         .matches(
           /^((\+48)|(0048)|(48))?[\s\-]?\d{3}[\s\-]?\d{3}[\s\-]?\d{3}$/,
           "invalid phone number"
         )
-        .required("iequired"),
+        .required("required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values: OrderType) => {
       setOrder({ ...cartItems, ...values });
       setIsSubmit(true);
     },
@@ -110,8 +110,8 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
     }
   };
 
-  let totalPrice: number = cartItems.reduce((total, item) => {
-    return total + Number(item.price) * item.qty;
+  let totalPrice: number = cartItems.reduce((total: number, item: CartItemType) => {
+    return total + item.price * item.qty;
   }, 0);
 
   return (
