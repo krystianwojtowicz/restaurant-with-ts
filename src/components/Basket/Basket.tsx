@@ -123,7 +123,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           <div className="item" key={item.id}>
             <div>
               <h4>{item.name}</h4>
-              <h5 className="price">${item.price}</h5>
+              <h4 className="price">${item.price}</h4>
             </div>
             <div>
               <i

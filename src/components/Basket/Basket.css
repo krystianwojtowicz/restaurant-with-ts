@@ -17,13 +17,11 @@
   font-weight: bold;
 }
 
-.basket .item .price,
-.basket .basket-paragraph .price {
+.basket .price, .basket .fas {
   margin: 10px 0;
 }
 
-.basket .item .fa-trash,
-.basket .basket-paragraph .fa-trash {
+.basket .fa-trash {
   display: block;
 }
 

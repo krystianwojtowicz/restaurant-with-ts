@@ -12,12 +12,12 @@
     border-radius: 0.5rem;
     padding: 5px;
     font-weight: bold;
-    .price {
-      margin: 10px 0;
-    }
-    .fa-trash {
-      display: block;
-    }
+  }
+  .price, .fas {
+    margin: 10px 0;
+  }
+  .fa-trash {
+    display: block;
   }
   .form {
     background: #ffffff;
