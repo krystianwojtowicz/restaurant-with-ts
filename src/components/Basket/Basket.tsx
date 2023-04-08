@@ -12,7 +12,7 @@ import "./Basket.scss";
 interface BasketProps {
   addPizza: (pizza: CartItemType) => void;
   removePizza: (pizza: CartItemType) => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 interface Option {
