@@ -1,20 +1,19 @@
 import './Input.scss';
 
 interface InputProps {
-  id?: string;
   type: string;
   placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
   value: string;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  ariaLabel?: string;
   touched?: boolean;
   error?: string;
   label?: string;
 }
 
 export const Input = ({
-  id,
   type,
   placeholder,
   onChange,
@@ -24,12 +23,14 @@ export const Input = ({
   touched,
   error,
   label,
+  ariaLabel,
 }: InputProps) => {
   return (
     <div className="input-div">
       <label className="label" htmlFor={name}>{label}</label>
       <input className="input"
-        id={id}
+        aria-label={ariaLabel}
+        id={name}
         type={type}
         placeholder={placeholder}
         onChange={onChange}

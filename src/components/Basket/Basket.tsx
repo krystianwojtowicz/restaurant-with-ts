@@ -12,6 +12,7 @@ import "./Basket.scss";
 interface BasketProps {
   addPizza: (pizza: CartItemType) => void;
   removePizza: (pizza: CartItemType) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 interface Option {
@@ -192,7 +193,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.numberOfStreet}
         ></Input>
         <Input
-          label="namber of flat"
+          label="number of flat"
           type="text"
           placeholder="number of flat"
           onChange={formik.handleChange}
@@ -206,6 +207,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
         <Select
           className="date"
           name="date"
+          aria-label="hour of delivery"
           value={options.find((option) => option.value === formik.values.date)}
           onChange={(option) => formik.setFieldValue("date", option?.value)}
           onBlur={formik.handleBlur}
@@ -224,6 +226,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
         ></Input>
         <Input
           label="phone number"
+          ariaLabel="phone number"
           type="text"
           placeholder="phone"
           onChange={formik.handleChange}
