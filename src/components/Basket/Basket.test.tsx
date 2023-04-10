@@ -1,14 +1,20 @@
-import { render, fireEvent, waitFor, act, screen } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  waitFor,
+  act,
+  screen,
+} from "@testing-library/react";
 import { Basket } from "./Basket";
-import { OrderType } from '../../Interface';
-import { useState, useEffect } from 'react';
+import { OrderType } from "../../Interface";
+import { useState, useEffect } from "react";
 import { OrderContext } from "../OrderContext";
 
 describe("Basket", () => {
   const addPizza = jest.fn();
   const removePizza = jest.fn();
   const onSubmit = jest.fn();
- 
+  
   it("calls the onSubmit function", async () => {
     const { getByLabelText } = render(
       <Basket
@@ -17,7 +23,6 @@ describe("Basket", () => {
         onSubmit={onSubmit}
       />
     );
-
     await act(async () => {
       fireEvent.change(getByLabelText("name"), {
         target: { value: "John Doe" },
@@ -49,5 +54,20 @@ describe("Basket", () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledWith({ lazy: true });
     });
+  });
+  test("renders component corectly", () => {
+    const { getByRole } = render(
+      <Basket
+        addPizza={addPizza}
+        removePizza={removePizza}
+      />
+    );
+    const button = screen.getByText(/submit/i);
+    expect(button).toBeInTheDocument();
+    const expectedText = "your cart";
+    const heading = getByRole("heading", { name: expectedText });
+    expect(heading).toBeInTheDocument();
+    const inputElement = screen.getByRole("textbox", { name: "city" });
+    expect(inputElement).toBeInTheDocument();
   });
 });
