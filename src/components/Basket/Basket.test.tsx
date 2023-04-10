@@ -4,11 +4,8 @@ import {
   waitFor,
   act,
   screen,
-  renderHook,
 } from "@testing-library/react";
 import { Basket } from "./Basket";
-// import { OrderType } from "../../Interface";
-import { useState, useEffect } from "react";
 import { OrderContext } from "../OrderContext";
  
 describe("Basket", () => {
