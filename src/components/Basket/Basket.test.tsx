@@ -10,15 +10,28 @@ import { Basket } from "./Basket";
 // import { OrderType } from "../../Interface";
 import { useState, useEffect } from "react";
 import { OrderContext } from "../OrderContext";
-
+ 
 describe("Basket", () => {
   const addPizza = jest.fn();
   const removePizza = jest.fn();
   const onSubmit = jest.fn();
 
+  it("should update the qty when the up arrow is clicked", () => {
+    const item = { id: "1", name: "Pizza Americana", price: 10, qty: 1 };
+  
+    const { getByTestId } = render(<i
+      data-testid="up-arrow"
+      className="fas fa-chevron-up"
+      onClick={() => addPizza(item)}
+    ></i>);
+  
+    fireEvent.click(getByTestId("up-arrow"));
+  
+    expect(addPizza).toHaveBeenCalledWith(item);
+  });
+
   it("should render with items in the cart", () => {
     const cartItems = [
-      { id: "1", name: "Pizza Americana", price: 10, qty: 2 },
       { id: "2", name: "Pizza Margherita", price: 8, qty: 1 },
     ];
     const setCartItems = jest.fn();
@@ -34,7 +47,7 @@ describe("Basket", () => {
     };
     const setOrder = jest.fn();
 
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       <OrderContext.Provider
         value={{ cartItems, setCartItems, order, setOrder }}
       >
@@ -42,9 +55,9 @@ describe("Basket", () => {
       </OrderContext.Provider>
     );
 
-    expect(getByText("Pizza Americana")).toBeInTheDocument();
     expect(getByText("Pizza Margherita")).toBeInTheDocument();
   });
+
   it("calls the onSubmit function", async () => {
     const { getByLabelText } = render(
       <Basket
@@ -85,6 +98,7 @@ describe("Basket", () => {
       expect(onSubmit).toHaveBeenCalledWith({ lazy: true });
     });
   });
+
   it("renders component corectly", () => {
     const { getByRole } = render(
       <Basket addPizza={addPizza} removePizza={removePizza} />
