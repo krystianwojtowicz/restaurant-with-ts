@@ -1,11 +1,15 @@
-import { render, fireEvent, waitFor, act } from "@testing-library/react";
+import { render, fireEvent, waitFor, act, screen } from "@testing-library/react";
 import { Basket } from "./Basket";
+import { OrderType } from '../../Interface';
+import { useState, useEffect } from 'react';
+import { OrderContext } from "../OrderContext";
 
 describe("Basket", () => {
   const addPizza = jest.fn();
   const removePizza = jest.fn();
   const onSubmit = jest.fn();
-  it("calls the onSubmit funciton", async () => {
+ 
+  it("calls the onSubmit function", async () => {
     const { getByLabelText } = render(
       <Basket
         addPizza={addPizza}
@@ -43,7 +47,7 @@ describe("Basket", () => {
     });
 
     await waitFor(() => {
-      expect(onSubmit).toHaveBeenCalled();
+      expect(onSubmit).toHaveBeenCalledWith({ lazy: true });
     });
   });
 });
