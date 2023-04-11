@@ -121,7 +121,7 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
   return (
     <main className="basket">
       <div>
-        <h1 className="heading">your cart</h1>
+        <h1 className="heading-basket">your cart</h1>
         {cartItems?.length === 0 && <h1 className="heading">Cart is Empty</h1>}
         {cartItems?.map((item) => (
           <div className="item" key={item.id}>
