@@ -2,7 +2,7 @@ import { CartItemType } from "../../Interface";
 import { useState, useEffect } from "react";
 import { collection, getDocs, QuerySnapshot } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import { Product } from "../Product/Product";
+import { Product } from "./Product/Product";
 import "./List.scss";
 
 interface ListProps {
@@ -22,7 +22,6 @@ export const List = (props: ListProps) => {
       }));
       setPizzas(pizzasData);
     };
-
     fetchPizzas();
   }, []);
 

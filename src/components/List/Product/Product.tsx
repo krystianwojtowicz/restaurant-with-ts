@@ -1,4 +1,4 @@
-import { CartItemType } from "../../Interface";
+import { CartItemType } from "../../../Interface";
 import "./Product.scss";
 
 interface ProductProps {
