@@ -13,9 +13,6 @@ interface BasketProps {
   addPizza: (pizza: CartItemType) => void;
   removePizza: (pizza: CartItemType) => void;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
-  cartItems?: CartItemType[];
-  addOrder?: any;
-  setIsSubmit?: any;
 }
 
 interface Option {

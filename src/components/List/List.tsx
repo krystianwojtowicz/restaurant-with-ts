@@ -10,7 +10,6 @@ interface ListProps {
 }
 
 export const List = (props: ListProps) => {
-  // const { cartItems, setCartItems } = useContext(OrderContext);
   const [pizzas, setPizzas] = useState<CartItemType[]>([]);
   const pizzasCollectionRef = collection(db, "meals");
 
@@ -21,7 +20,6 @@ export const List = (props: ListProps) => {
         ...doc.data(),
         id: doc.id,
       }));
-      // console.log(pizzasData);
       setPizzas(pizzasData);
     };
 
