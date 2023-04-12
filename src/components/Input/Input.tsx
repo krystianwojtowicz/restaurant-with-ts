@@ -1,4 +1,4 @@
-import './Input.scss';
+import "./Input.scss";
 
 interface InputProps {
   type: string;
@@ -27,8 +27,11 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div className="input-div">
-      <label className="label" htmlFor={name}>{label}</label>
-      <input className="input"
+      <label className="label" htmlFor={name}>
+        {label}
+      </label>
+      <input
+        className="input"
         aria-label={ariaLabel}
         id={name}
         type={type}

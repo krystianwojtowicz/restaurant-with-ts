@@ -4,7 +4,8 @@ import { OrderContextType } from "../Interface";
 export const OrderContext = createContext<OrderContextType>({
   cartItems: [],
   setCartItems: () => {},
-  order: {cartItems: [],
+  order: {
+    cartItems: [],
     city: "",
     customerName: "",
     date: "",
@@ -12,6 +13,7 @@ export const OrderContext = createContext<OrderContextType>({
     numberOfFlat: "",
     numberOfStreet: "",
     phone: "",
-    street: "",},
+    street: "",
+  },
   setOrder: () => {},
 });

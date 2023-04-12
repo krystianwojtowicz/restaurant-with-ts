@@ -111,9 +111,12 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
     }
   };
 
-  let totalPrice: number = cartItems.reduce((total: number, item: CartItemType) => {
-    return total + item.price * item.qty;
-  }, 0);
+  let totalPrice: number = cartItems.reduce(
+    (total: number, item: CartItemType) => {
+      return total + item.price * item.qty;
+    },
+    0
+  );
 
   return (
     <main className="basket">
@@ -203,7 +206,9 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           touched={formik.touched.numberOfFlat}
           error={formik.errors.numberOfFlat}
         ></Input>
-        <label className="label-date" htmlFor="date">hour of delivery</label>
+        <label className="label-date" htmlFor="date">
+          hour of delivery
+        </label>
         <Select
           className="date"
           name="date"
@@ -237,7 +242,9 @@ export const Basket = ({ addPizza, removePizza }: BasketProps) => {
           error={formik.errors.phone}
         ></Input>
 
-        <button className="button" type="submit">submit</button>
+        <button className="button" type="submit">
+          submit
+        </button>
       </form>
     </main>
   );

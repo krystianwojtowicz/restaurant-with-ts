@@ -16,7 +16,9 @@ export const Product = ({ pizza, addPizza }: ProductProps) => {
       </p>
       <div className="flex">
         <h2>{pizza.price} $</h2>
-        <button className="button" onClick={() => addPizza(pizza)}>add to cart</button>
+        <button className="button" onClick={() => addPizza(pizza)}>
+          add to cart
+        </button>
       </div>
     </div>
   );

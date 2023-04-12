@@ -18,7 +18,8 @@
   font-weight: bold;
 }
 
-.basket .price, .basket .fas {
+.basket .price,
+.basket .fas {
   margin: 10px 0;
 }
 

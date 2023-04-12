@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { Basket } from "./Basket";
 import { OrderContext } from "../OrderContext";
- 
+
 describe("Basket", () => {
   const addPizza = jest.fn();
   const removePizza = jest.fn();
@@ -15,22 +15,22 @@ describe("Basket", () => {
 
   it("should update the qty when the up arrow is clicked", () => {
     const item = { id: "1", name: "Pizza Americana", price: 10, qty: 1 };
-  
-    const { getByTestId } = render(<i
-      data-testid="up-arrow"
-      className="fas fa-chevron-up"
-      onClick={() => addPizza(item)}
-    ></i>);
-  
+
+    const { getByTestId } = render(
+      <i
+        data-testid="up-arrow"
+        className="fas fa-chevron-up"
+        onClick={() => addPizza(item)}
+      ></i>
+    );
+
     fireEvent.click(getByTestId("up-arrow"));
-  
+
     expect(addPizza).toHaveBeenCalledWith(item);
   });
 
   it("should render with items in the cart", () => {
-    const cartItems = [
-      { id: "2", name: "Pizza Margherita", price: 8, qty: 1 },
-    ];
+    const cartItems = [{ id: "2", name: "Pizza Margherita", price: 8, qty: 1 }];
     const setCartItems = jest.fn();
     const order = {
       customerName: "",

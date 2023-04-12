@@ -49,7 +49,7 @@ export const App = () => {
             : x
         )
       );
-      console.log(cartItems)
+      console.log(cartItems);
     } else {
       setCartItems([...cartItems, { ...pizzaWithoutSomeData, qty: 1 }]);
     }
